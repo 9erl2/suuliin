@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'ghx2gjs',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+  <meta charset="utf-8">
+  <title>랜덤 여행지 선택</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'umamor';
+      src: url('fonts/umamor.woff2') format('woff2'),
+           url('fonts/umamor.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      background-image: url('Mainpic/Randomain.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: sans-serif;
+    }
+    canvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    #instruction {
+      color: white;
+      font-size: 3rem;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.0);
+      font-family: "umamor", sans-serif;
+      font-weight: 800;
+      font-style: normal;
+      justify-content: space-evenly;
+    }
+
+                    #infoOverlay {
+                    font-family: "umamor", sans-serif;
+                    font-weight: 800;
+                    font-style: normal;
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    background-color: rgba(0, 0, 0, 0.7);
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 999;
+                    flex-direction: column;
+                  }
+
+    #infoOverlay h2 {
+      color: white;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+                  #infoOverlay p {
+                    max-width: 80%;
+                    font-size: 1.2rem;
+                    text-align: center;
+                    color: white;
+                    margin-bottom: 2rem;
+                  }
+                  #infoOverlay iframe {
+                    width: 80%;
+                    height: 800px;
+                    margin: 2rem 0;
+                    border: none;
+                    border-radius: 15px;
+                    transition: transform 0.3s ease;
+                  }
+                  #infoOverlay iframe:hover {
+                    transform: scale(1.02);
+                  }
+                  #closeBtn {
+                    position: absolute;
+                    top: 2rem;
+                    right: 4rem;
+                    font-size: 1.5rem;
+                    color: white;
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                    background: none;
+                    border: none;
+                    padding: 0.5rem;
+                  }
+                  #closeBtn:hover {
+                    transform: scale(1.1);
+                    color: #ff6b6b;
+                  }
+
+    #beachTitle {
+      color: white;
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2rem;
+      text-align: center;
+      font-family: "umamor", sans-serif;
+      font-weight: 800;
+      font-style: normal;
+    }
+
+  </style>
+</head>
+<body>
+<div id="overlay">
+  <div id="instruction">
+    🌊 원하는 원을 선택하여 랜덤 해변지를 확인하세요 🌊
+  </div>
+</div>
+<canvas id="myCanvas" resize></canvas>
+<script>
+  document.getElementById('overlay').addEventListener('click', function () {
+    this.style.display = 'none';
+  });
+
+  document.getElementById('closeBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('infoOverlay').style.display = 'none';
+  });
+
+  function closeOverlay() {
+    document.getElementById('overlay').style.display = 'none';
+  }
+
+  function closeInfoOverlay() {
+    document.getElementById('infoOverlay').style.display = 'none';
+  }
+</script>
+<script type="text/paperscript" canvas="myCanvas">
+  var count = 8;
+  var circles = [];
+
+  for (var i = 0; i < count; i++) {
+    var center = Point.random() * view.size;
+    
+    var hue = 160 + Math.random() * 120;
+    var color = new Color({ hue: hue, saturation: 0.50, brightness: 0.9 });
+    
+    var circle = new Path.Circle({
+      center: center,
+      radius: 100 + Math.random() * 100,
+      fillColor: {
+        gradient: {
+          stops: [
+            [color.clone().brightness += 0.2, 0],
+            [color, 0.5],
+            [color.clone().brightness -= 0.1, 1]
+          ],
+          radial: true
+        },
+        origin: center + new Point(-20, -20),
+        destination: center + new Point(200, 200)
+      },
+      opacity: 0.8,
+      shadowColor: new Color(0, 0, 0, 0.6),
+      shadowBlur: 100,
+      shadowOffset: new Point(1, 10)
+    });
+
+    // 각 원마다 다른 해변 정보 설정
+    var beachInfo = [
+      {
+        title: "Monkey Beach Phi Phi Island, Thailand",
+        description: "태국의 몽키 비치는 원숭이들이 자유롭게 돌아다니는 독특한 해변입니다. 에메랄드빛 바다와 열대우림이 어우러진 천국 같은 풍경을 자랑합니다.",
+        webcamUrl: "https://www.youtube.com/embed/IlXhywbggFY?si"
+      },
+      {
+        title: "Bondi Beach, Australia",
+        description: "호주의 본다이 비치는 시드니에서 가장 유명한 해변으로, 서핑의 성지로 알려져 있습니다. 1km 길이의 아름다운 곡선형 해변과 청록색 바다, 활기찬 해변 문화가 특징입니다.",
+        webcamUrl: "https://bondisurfclub.com/bondi-surf-cam/"
+      },
+      {
+        title: "Jerusalem Beach, Israel",
+        description: "이스라엘의 예루살렘 해변은 지중해의 따뜻한 기후와 자유로운 분위기가 특징입니다. 도시적이고 활기찬 해변 문화를 경험할 수 있습니다.",
+        webcamUrl: "https://www.youtube.com/embed/XXhLPh0cvTg?si"
+      },
+      {
+        title: "La Pelosa Beach, Italy",
+        description: "이탈리아의 라 펠로사 해변은 사르데냐 섬의 보석과 같은 해변입니다. 투명한 청록색 바다와 백사장이 어우러진 아름다운 풍경을 자랑합니다.",
+        webcamUrl: "https://www.youtube.com/embed/3Abwf--n0lk?si"
+      },
+      {
+        title: "Changi Beach, Singapore",
+        description: "싱가포르의 창이 비치는 도시의 번잡함에서 벗어나 휴식을 취할 수 있는 평화로운 해변입니다. 아름다운 일출과 함께 산책하기 좋은 곳입니다.",
+        webcamUrl: "https://www.youtube.com/embed/HDMBwdjDLmQ?si"
+      },
+      {
+        title: "Sauble Beach, Canada",
+        description: "캐나다의 소블 비치는 온타리오 호수 연안의 아름다운 해변입니다. 부드러운 모래사장과 깨끗한 물이 특징이며, 조용하고 평화로운 분위기를 자랑합니다.",
+        webcamUrl: "https://www.youtube.com/embed/44RM28qTnGI?si"
+      },
+      {
+        title: "Cala Mariolu Beach, Thailand",
+        description: "태국의 칼라 마리올루 비치는 사르데냐 섬의 보석과 같은 해변입니다. 투명한 청록색 바다와 하얀 자갈 해변, 주변의 절벽이 어우러진 아름다운 풍경을 자랑합니다.",
+        webcamUrl: "https://www.youtube.com/embed/PmI-NKIALb8"
+      },
+      {
+        title: "Masada Beach, Israel",
+        description: "하와이의 와이키키 비치는 세계에서 가장 유명한 해변 중 하나입니다. 부드러운 모래와 따뜻한 물, 그리고 멋진 일몰을 볼 수 있습니다.",
+        webcamUrl: "https://www.youtube.com/embed/yA6o5B8_nZ8?si"
+      }
+    ];
+
+    circle.data = {
+      vector: new Point({
+        angle: Math.random() * 360,
+        length: 0.2 + Math.random() * 0.3
+      }),
+      info: beachInfo[i]
+    };
+
+    circles.push(circle);
+  }
+
+  function onFrame() {
+    for (var i = 0; i < circles.length; i++) {
+      var item = circles[i];
+      item.position += item.data.vector;
+
+      if (item.position.x < 0 || item.position.x > view.size.width) {
+        item.data.vector.x *= -1;
+      }
+      if (item.position.y < 0 || item.position.y > view.size.height) {
+        item.data.vector.y *= -1;
+      }
+    }
+  }
+
+  function onMouseDown(event) {
+    for (var i = 0; i < circles.length; i++) {
+      var item = circles[i];
+      if (item.hitTest(event.point)) {
+        var info = item.data.info;
+        document.getElementById("beachTitle").innerText = info.title;
+        document.getElementById("beachDescription").innerText = info.description;
+        document.getElementById("beachWebcam").src = info.webcamUrl;
+        document.getElementById("infoOverlay").style.display = "flex";
+        break;
+      }
+    }
+  }
+</script>
+          <div id="infoOverlay">
+            <div id="closeBtn" onclick="closeInfoOverlay()">✖</div>
+            <h2 id="beachTitle"></h2>
+            <p id="beachDescription">해변 설명이 여기에 나옵니다.</p>
+            <iframe id="beachWebcam" src=""></iframe>
+          </div>
+
+</body>
+</html>

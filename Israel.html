@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Israel</title>
+
+  <script>
+    (function(d) {                                             
+      var config = {
+        kitId: 'ghx2gjs',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+     body {
+      margin: 0;
+      color: white;
+      overflow-x: hidden;
+      background: url('Mainpic/sea.jpg') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+      font-family: "jtthayansae", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .설명문 {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.4rem;
+      background-color: rgba(0, 0, 0, 0.0);
+    }
+    .texts {
+      position:absolute;
+      top:0%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 5rem;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.0);
+      
+    }
+    .text-container {
+      display: flex;
+      top:25%;
+      justify-content: center;
+      gap: 100px;
+      margin-top: 100px;
+      flex-wrap: wrap;
+      z-index: 2;
+      position: relative;
+    }
+    .text-box {
+      width: 300px;
+      text-align: center;
+    }
+    .image-text {
+      text-align: center;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    .slide-grid {
+      display: flex;
+      gap: 70px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .slider-box {
+      top:260px;
+      position: relative;
+      width: 380px;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 0px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      background-color: #222;
+    }
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slider-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 27px;
+      background: rgba(0,0,0,0.2);
+      border: none;
+      color: white;
+      padding: 8px 17px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .left {
+      left: 10px;
+    }
+    .right {
+      right: 10px;
+    }
+            .hoverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+          }
+            .hoverlay-content {
+            background-size: 100%;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 300px;
+            box-shadow: 0 0 30px rgb(182, 182, 182);
+          }
+            .close-button {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+          }
+
+  </style>
+</head>
+<body>
+  <div class="texts">Israel</div>
+  <div class="설명문">이스라엘의 해변은 지중해의 따뜻한 기후와 자유로운 분위기가 특징인 곳이다. 텔아비브 해변은 도시적이고 활기찬 느낌을 주며, 사해는 독특한 부력 체험이 가능한 곳이다.</div>
+
+  <div class="text-container">
+    <div class="text-box"><div class="image-text">Masada Beach</div></div>
+    <div class="text-box"><div class="image-text">Jarusalem Beach</div></div>
+    <div class="text-box"><div class="image-text">Galilee Beach</div></div>
+   
+  </div>
+
+    <div class="slide-grid">
+    <div class="slider-box">
+      <div class="slides" id="slides1">
+        <div class="slide"><img src="Israel/Masada beach/masada1.png" alt=""></div>
+        <div class="slide"><img src="Israel/Masada beach/masada.png" alt=""></div>
+        <div class="slide"><img src="Israel/Masada beach/masada2.png" alt=""></div>
+        <div class="slide"><img src="Israel/Masada beach/masada3.png" alt=""></div>
+        <div class="slide"><img src="Israel/Masada beach/masada4.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(1)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(1)">›</button>
+    </div>
+
+    <div class="slider-box">
+      <div class="slides" id="slides2">
+        <div class="slide"><img src="Israel/Jarusalem beach/jarusalem2.png" alt=""></div>
+        <div class="slide"><img src="Israel/Jarusalem beach/jarusalem.png" alt=""></div>
+        <div class="slide"><img src="Israel/Jarusalem beach/jarusalem1.png" alt=""></div>
+        <div class="slide"><img src="Israel/Jarusalem beach/jarusalem3.png" alt=""></div>
+        <div class="slide"><img src="Israel/Jarusalem beach/jarusalem4.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(2)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(2)">›</button>
+    </div>
+
+    <div class="slider-box">
+      <div class="slides" id="slides4">
+        <div class="slide"><img src="Israel/Galilee beach/galilee.png" alt=""></div>
+        <div class="slide"><img src="Israel/Galilee beach/galilee1.png" alt=""></div>
+        <div class="slide"><img src="Israel/Galilee beach/galilee2.png" alt=""></div>
+        <div class="slide"><img src="Israel/Galilee beach/galilee3.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(4)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(4)">›</button>
+    </div>
+    </div>
+  <script>
+    const currentIndices = [0, 0, 0, 0];
+
+    function updateSlide(sliderNum) {
+      const slides = document.getElementById(`slides${sliderNum}`);
+      const offset = -currentIndices[sliderNum - 1] * 100;
+      slides.style.transform = `translateX(${offset}%)`;
+    }
+    function nextSlide(sliderNum) {
+      const slides = document.getElementById(`slides${sliderNum}`);
+      const totalSlides = slides.children.length;
+      if (currentIndices[sliderNum - 1] < totalSlides - 1) {
+        currentIndices[sliderNum - 1]++;
+        updateSlide(sliderNum);
+      }
+    }
+    function prevSlide(sliderNum) {
+      if (currentIndices[sliderNum - 1] > 0) {
+        currentIndices[sliderNum - 1]--;
+        updateSlide(sliderNum);
+      }
+    }
+  </script>
+ 
+  </div>
+</body>
+</html>

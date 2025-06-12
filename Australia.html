@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Australia</title>
+
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'ghx2gjs',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+  <style>
+    /*  #map {
+      top:500px;
+      height: 600px;
+    } */
+
+     body {
+      margin: 0;
+      color: white;
+      overflow-x: hidden;
+      background: url('Mainpic/배경화면고민.jpg') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+      font-family: "jtthayansae", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .설명문 {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.4rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    .texts {
+      position:absolute;
+      top:0%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 4rem;
+      text-align: center;
+    }
+    .text-container {
+      display: flex;
+      top:25%;
+      justify-content: center;
+      gap: 100px;
+      margin-top: 100px;
+      flex-wrap: wrap;
+      z-index: 2;
+      position: relative;
+    }
+    .text-box {
+      width: 300px;
+      text-align: center;
+    }
+    .image-text {
+      text-align: center;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem); 
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    /*.overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    } */
+    .slide-grid {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .slider-box {
+      top:260px;
+      position: relative;
+      width: 380px;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 0px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      background-color: #222;
+    }
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slider-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 27px;
+      background: rgba(0,0,0,0.2);
+      border: none;
+      color: white;
+      padding: 8px 17px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .left {
+      left: 10px;
+    }
+    .right {
+      right: 10px;
+    }
+            .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+          }
+            .overlay-content {
+            background-size: 100%;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 300px;
+            box-shadow: 0 0 30px rgb(182, 182, 182);
+          }
+            .close-button {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+          }
+  </style>
+</head>
+<body>
+  <div class="texts">Australia</div>
+  <div class="설명문">호주의 해변은 길고 광활하며 파도가 높아 서핑의 명소이다. 골드코스트와 본다이비치 등 세계적으로 유명한 해변이 많고, 자유롭고 활기찬 분위기를 지닌 곳이다.</div>
+
+  <div class="text-container">
+    <div class="text-box"><div class="image-text">Manly Beach</div></div>
+    <div class="text-box"><div class="image-text">White Haven Beach</div></div>
+    <div class="text-box"><div class="image-text">Four Mile Beach</div></div>
+    <div class="text-box"><div class="image-text">Palm Cove Beach</div></div>
+  </div>
+
+    <div class="slide-grid">
+    <div class="slider-box">
+      <div class="slides" id="slides1">
+        <div class="slide"><img src="SydnyBeach/manly5.png" alt=""></div>
+        <div class="slide"><img src="SydnyBeach/manly2.png" alt=""></div>
+        <div class="slide"><img src="SydnyBeach/manly3.png" alt=""></div>
+        <div class="slide"><img src="SydnyBeach/manly4.png" alt=""></div>
+        <div class="slide"><img src="SydnyBeach/manly1.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(1)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(1)">›</button>
+    </div>
+
+    <div class="slider-box">
+      <div class="slides" id="slides2">
+        <div class="slide"><img src="Whitehaven/whitehaven1.jpg" alt=""></div>
+        <div class="slide"><img src="Whitehaven/whitehaven2.png" alt=""></div>
+        <div class="slide"><img src="Whitehaven/whitehaven3.png" alt=""></div>
+        <div class="slide"><img src="Whitehaven/whitehaven4.png" alt=""></div>
+        <div class="slide"><img src="Whitehaven/whitehaven5.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(2)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(2)">›</button>
+    </div>
+
+    <div class="slider-box">
+      <div class="slides" id="slides3">
+        <div class="slide"><img src="Palmcove/palmcove.png" alt=""></div>
+        <div class="slide"><img src="Palmcove/palmcove1.png" alt=""></div>
+        <div class="slide"><img src="Palmcove/palmcove2.png" alt=""></div>
+        <div class="slide"><img src="Palmcove/palmcove3.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(3)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(3)">›</button>
+    </div>
+
+    <div class="slider-box">
+      <div class="slides" id="slides4">
+        <div class="slide"><img src="Fourmile/fourmile.png" alt=""></div>
+        <div class="slide"><img src="Fourmile/fourmile1.png" alt=""></div>
+        <div class="slide"><img src="Fourmile/fourmile3.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(4)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(4)">›</button>
+    </div>
+    </div>
+  <script>
+    const currentIndices = [0, 0, 0, 0];
+
+    function updateSlide(sliderNum) {
+      const slides = document.getElementById(`slides${sliderNum}`);
+      const offset = -currentIndices[sliderNum - 1] * 100;
+      slides.style.transform = `translateX(${offset}%)`;
+    }
+    function nextSlide(sliderNum) {
+      const slides = document.getElementById(`slides${sliderNum}`);
+      const totalSlides = slides.children.length;
+      if (currentIndices[sliderNum - 1] < totalSlides - 1) {
+        currentIndices[sliderNum - 1]++;
+        updateSlide(sliderNum);
+      }
+    }
+    function prevSlide(sliderNum) {
+      if (currentIndices[sliderNum - 1] > 0) {
+        currentIndices[sliderNum - 1]--;
+        updateSlide(sliderNum);
+      }
+    }
+  </script>
+
+  <!--호텔 정보 보여주는 란 테스트하기-->
+
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([49.1265, -125.8820], 13);
+  
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+  
+    var hotelIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/139/139899.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32]
+    });
+  
+    var beachMarker = L.marker([49.1265, -125.8820]).addTo(map);
+    beachMarker.bindPopup("<b>Long Beach</b><br>Tofino, British Columbia");
+  
+    var hotels = [
+      { name: "Wickaninnish Inn", lat: 49.1260, lng: -125.9120 },
+      { name: "Long Beach Lodge Resort", lat: 49.1200, lng: -125.8800 },
+      { name: "Pacific Sands Beach Resort", lat: 49.1230, lng: -125.8850 },
+      { name: "Ocean Village Resort", lat: 49.1250, lng: -125.8900 },
+      { name: "Best Western Plus Tin Wis Resort", lat: 49.1270, lng: -125.8950 }
+    ];
+  
+    hotels.forEach(function(hotel) {
+      L.marker([hotel.lat, hotel.lng], {icon: hotelIcon})
+        .addTo(map)
+        .bindPopup("<b>" + hotel.name + "</b>");
+    });
+  </script>
+  <!-- <div style="width: 100%; height: 500px; margin-top: 400px;">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48782989.86616647!2d113.338953!3d-25.274398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b0d1d3c043ddc1f%3A0x504f0b535df4b90!2z7Iug7IiY7YOA!5e0!3m2!1sko!2skr!4v1716612512345!5m2!1sko!2skr" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>-->
+</body>
+</html>

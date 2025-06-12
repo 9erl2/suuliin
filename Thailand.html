@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Thailand</title>
+  
+  <script>
+    (function(d) {                                             
+      var config = {
+        kitId: 'ghx2gjs',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+  /*  #map {
+      top:500px;
+      height: 600px;
+    } */
+     
+     body {
+      margin: 0;
+      color: white;
+      overflow-x: hidden;
+      background: url('Mainpic/배경화면고민.jpg') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+      font-family: "jtthayansae", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .설명문 {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.4rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    .texts {
+      position:absolute;
+      top:0%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 4rem;
+      text-align: center;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+      
+    }
+    .text-container {
+      display: flex;
+      top:25%;
+      justify-content: center;
+      gap: 100px;
+      margin-top: 100px;
+      flex-wrap: wrap;
+      z-index: 2;
+      position: relative;
+    }
+    .text-box {
+      width: 300px;
+      text-align: center;
+    }
+    .image-text {
+      text-align: center;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem); 
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    .slide-grid {
+      display: flex;
+      gap: 70px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .slider-box {
+      top:260px;
+      position: relative;
+      width: 380px;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 0px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      background-color: #222;
+    }
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slider-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 27px;
+      background: rgba(0,0,0,0.2);
+      border: none;
+      color: white;
+      padding: 8px 17px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .left {
+      left: 10px;
+    }
+    .right {
+      right: 10px;
+    }
+            .hoverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+          }
+            .hoverlay-content {
+            background-size: 100%;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 300px;
+            box-shadow: 0 0 30px rgb(182, 182, 182);
+          }
+            .close-button {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+          }
+
+  </style>
+</head>
+<body>
+  <div class="texts">Thailand</div>
+  <div class="설명문">태국의 해변은 맑은 바다, 부드러운 백사장, 열대의 분위기가 어우러진 휴양지이다. <br>푸껫, 끄라비, 꼬사무이 등은 이국적인 아름다움을 지닌 대표적인 해변이다.</div>
+
+              <script>
+                function showOverlay(imageUrl, title) {
+                  const overlay = document.getElementById('hoverlay');
+                  const content = document.getElementById('hoverlayContent');
+
+                  content.style.backgroundImage = `url('${imageUrl}')`;
+                  content.innerHTML = `
+                    <span class="close-button" onclick="closeOverlay()">×</span>
+                    <h2 style="color:white; text-align:center;">${title}</h2>
+                  `;
+                  overlay.style.display = 'flex';
+                }
+                function closeOverlay() {
+                  document.getElementById('hoverlay').style.display = 'none';
+                }
+                document.getElementById('hoverlay').addEventListener('click', function (e) {
+                if (e.target === this) {
+                  this.style.display = 'none';
+                }
+                });
+              </script>
+
+  <div class="text-container">
+    <div class="text-box"><div class="image-text">Banana Beach
+      
+    </div></div>
+    <div class="text-box"><div class="image-text">Kata Beach
+      
+    </div></div>
+    <div class="text-box"><div class="image-text">Monkey Beach
+      
+    </div></div>
+  </div>
+
+    <div class="slide-grid">
+    <div class="slider-box">
+      <div class="slides" id="slides1">
+        <div class="slide"><img src="Thailand/Banana beach/Banana beach1.jpeg" alt=""></div>
+        <div class="slide"><img src="Thailand/Banana beach/thailand banana.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Banana beach/Banana beach2.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Banana beach/Banana beach3.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Banana beach/Banana beach4.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Banana beach/Banana beach5.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(1)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(1)">›</button>
+    </div>
+
+    <div class="slider-box">
+      <div class="slides" id="slides2">
+        <div class="slide"><img src="Thailand/Kata beach/Kata4.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Kata beach/Kata2.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Kata beach/Kata3.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Kata beach/Kata1.png" alt=""></div>
+      </div>
+      <button class="slider-button left" onclick="prevSlide(2)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(2)">›</button>
+    </div>
+
+    <div class="slider-box">
+      <div class="slides" id="slides3">
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey0.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey1.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey2.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey3.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey4.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey5.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey6.png" alt=""></div>
+        <div class="slide"><img src="Thailand/Monkey beach/Monkey7.png" alt=""></div>
+
+      </div>
+      <button class="slider-button left" onclick="prevSlide(3)">‹</button>
+      <button class="slider-button right" onclick="nextSlide(3)">›</button>
+    </div>
+
+
+        <div class="hoverlay" id="hoverlay">
+          <div class="hoverlay-content" id="hoverlayContent">
+            <span class="close-button" onclick="closeOverlay()">×</span>
+          </div>
+    
+  <script>
+    const currentIndices = [0, 0, 0, 0];
+
+    function updateSlide(sliderNum) {
+      const slides = document.getElementById(`slides${sliderNum}`);
+      const offset = -currentIndices[sliderNum - 1] * 100;
+      slides.style.transform = `translateX(${offset}%)`;
+    }
+    function nextSlide(sliderNum) {
+      const slides = document.getElementById(`slides${sliderNum}`);
+      const totalSlides = slides.children.length;
+      if (currentIndices[sliderNum - 1] < totalSlides - 1) {
+        currentIndices[sliderNum - 1]++;
+        updateSlide(sliderNum);
+      }
+    }
+    function prevSlide(sliderNum) {
+      if (currentIndices[sliderNum - 1] > 0) {
+        currentIndices[sliderNum - 1]--;
+        updateSlide(sliderNum);
+      }
+    }
+  </script>
+
+</body>
+</html>

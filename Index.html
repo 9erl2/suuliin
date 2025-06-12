@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script>
+        (function(d) {
+          var config = {
+            kitId: 'ghx2gjs',
+            scriptTimeout: 3000,
+            async: true
+          },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+      </script>
+    <meta charset="utf-8">
+    <title>SS</title>
+    <style>
+        body{
+            font-family: "umamor", sans-serif;
+            font-weight: 800;
+            font-style: normal;
+            margin: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+        }
+        .menusub {
+            display: flex;
+            justify-content: space-evenly;
+            font-family: 'umamor';
+            font-weight:800;
+            font-size: normal;
+            color: azure;
+        }
+        .bigtexts {
+            font-size: 2.5rem;
+            position: absolute;
+            width: 100vw;
+            text-align: center;
+            color: aliceblue;
+            top: 400px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+        }
+        .smalltexts {
+            position: relative;
+            font-size: 1.4rem;
+            width: 100vw;
+            left: 100px;
+            color: aliceblue;
+            top: 100px;
+            display: none;
+            text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.445);
+           
+        }
+        .box {
+            position: relative;
+            margin: 100px auto;
+            width: 700px;
+            height: 40px;
+            top: 300px;
+            font-size: 30px;
+            color: azure;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .button-container {
+            font-family: "umamor", sans-serif;
+            font-weight: 800;
+            font-style: normal;
+            position: absolute;
+            top: 700px;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            gap: 200px;
+        }
+        .select-button {
+            font-size: 3rem;
+            font-family: "umamor", sans-serif;
+            font-style: normal;
+            top: 400px;
+            border: none;
+            padding: 50px 50px;
+            background-color: rgba(202, 202, 202, 0);
+            background-size: 500vw;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            color: white;
+            cursor: pointer;
+        }
+        .select-button:hover {
+            background-color: rgba(0, 0, 0, 0.241);
+            background-size: 100px;
+            border-radius: 10px;
+        }
+        .select-button2 {
+            font-size: 3rem;
+            font-family: "umamor", sans-serif;
+            font-style: normal;
+            top: 400px;
+            border: none;
+            padding: 50px 50px;
+            background-color: rgba(202, 202, 202, 0);
+            background-size: 500vw;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            color: white;
+            cursor: pointer;
+        }
+        .select-button2:hover {
+            background-color: rgba(0, 0, 0, 0.241);
+            background-size: 100px;
+            border-radius: 10px;
+        }
+        #result {
+            position: absolute;
+            top: 550px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+        }
+        .option-grid {
+            position:absolute;
+            top: 100px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0px;
+            width: 100%;
+            margin: 0px;
+    }
+    .option-item {
+      aspect-ratio: 1 / 1;
+      background-size: cover;
+      background-position: center;
+      border-radius: 1px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .option-item:hover {
+      transform: scale(1.05);
+    }
+    .toggle-info {
+        background-color: aliceblue;
+    }
+    </style>
+</head>
+<body>
+    <button id="toggle-info" title="웹페이지 소개글"
+    style="position: absolute;
+    top: 40px;
+    right: 40px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+    ">🏖️</button>
+
+    <div class="smalltexts">이 웹페이지는 당신의 작은 여행 갈망을 해소해줄 수 있는 공간이었으면 합니다. 이곳에서 당신은 원하는 나라의 해변 정보와 호텔 위치 정보 등<br> 실제 여행에 도움이 되는 정보를 얻을 수 있으며, 한편으로는 가상으로 여행을 떠날 수도 있습니다.
+        가상으로 여행을 떠나는 방법은, 원하는 원을 <br>선택하여 해당 나라 해변의 실시간 캠으로 이동하고 관련 날씨 정보를 확인하는 것입니다. 이 공간에서 오로지 황홀한 해변에 집중할 수 있을 거예요.<br>
+        여행을 다 마치고 나면, 분명 아쉬운 마음도 남을 거라 생각해요. 그런 당신을 위해 파도 소리를 들으며<br> 힐링할 수 있는 유튜브 영상 링크도 추천해 드릴게요.
+        </div>
+    <div class="bigtexts">Q.마음이 이끄는 여행, 실제로 떠나고 싶은 건가요? 아니면 상상 속 여행으로 충분하신가요?</div>
+    
+    <div class="box" onclick="goToNextSection()"></div>
+    <div class="button-container"><br>
+        <button class="select-button" onclick="location.href='여행나라.html'">실제로 여행할 계획</button>
+        <button class="select-button2" onclick="location.href='랜덤여행지.html'">상상 속 여행</button>
+    <script>
+        const images = [
+            "Mainpic/메인화면 이미지2.jpg",
+            "Mainpic/singapore lazarus.jpg",
+            "Mainpic/메인화면 이미지7.jpg",
+           ];
+        function changeBackground() {
+            const randomIndex = Math.floor(Math.random() * images.length);
+            document.body.style.backgroundImage = `url('${images[randomIndex]}')`;
+        }
+        changeBackground();
+        setInterval(changeBackground, 5000);
+        function showAnswer(choice) {
+            const result = document.getElementById('result');
+        }
+        function toggleClick(eliment) {
+            eliment.classList.toggle('clicked');
+        }
+        document.getElementById('toggle-info').addEventListener('click', function () {
+        const info = document.querySelector('.smalltexts');
+        if (info.style.display === 'none' || info.style.display === '') {
+            info.style.display = 'block';
+        } else {
+            info.style.display = 'none';
+        }
+    });
+
+    </script>
+</body>
+</html>

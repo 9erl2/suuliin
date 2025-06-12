@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head> 
+  <meta charset="UTF-8">
+  <title>여행지 선택</title>
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'ghx2gjs',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+
+    <script>
+        (function(d) {
+          var config = {
+            kitId: 'ghx2gjs',
+            scriptTimeout: 3000,
+            async: true
+          },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+
+        function showOverlay(imageUrl, countryName) {
+        const overlay = document.getElementById('overlay');
+        const overlayContent = document.getElementById('overlayContent');
+        const button = overlayContent.querySelector('.description-button');
+
+        overlayContent.style.backgroundImage = `url('${imageUrl}')`;
+        const pageMap = {
+          'Italy': 'Italy.html',
+          'Singapore': 'Singapore.html',
+          'Australia': 'Australia.html',
+          'Canada': 'Canada.html',
+          'Thailand': 'Thailand.html',
+          'Israel': 'Israel.html'
+        };
+
+        button.onclick = () => location.href = pageMap[countryName];
+        overlay.style.display = 'flex';
+        }
+    </script>
+  <style>
+    #overlay1 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    #instruction {
+      color: white;
+      font-size: 3.5rem;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.0);
+      font-family: "umamor", sans-serif;
+      font-weight: 800;
+      font-style: normal;
+      justify-content: space-evenly;
+    }
+    body {
+      margin: 0;
+      background-color: black;
+    }
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0;
+      width: 100vw;
+    }
+    .option-item {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 1 / 1;
+      background-size: cover;
+      background-position: center;
+      border-radius: 1px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 1s ease;
+    }
+    .option-item:hover {
+      transform: scale(1.01);
+    }
+    
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100vw; 
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .overlay-content {
+      width: 300px; 
+      height: 40px;
+      background-size: 120%;
+      background-position: center;
+      position: relative;
+     /*  
+      display: flex; 
+      flex-direction: column;
+      justify-content: flex-end;
+      */
+      padding: 300px;
+     /*
+      box-shadow: 0 0 50px rgb(0, 0, 0); 
+      */
+    }
+    .description-button {
+      border-radius: 10px;
+      position: absolute; /* 또는 relative, fixed 등 상황에 따라 */
+      top:85%;
+      left:80%;
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 94, 161);
+      padding: 19px 10px;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      font-family: "umamor", sans-serif;
+      justify-content: space-evenly;
+    /*
+      cursor: pointer;
+      align-self: flex-end; 
+      */
+    }
+    .close-button {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+    }
+    
+  </style>
+</head>
+<body>
+    <div id="overlay1">
+        <div id="instruction">
+         끌리는 이미지를 선택하세요.
+        </div>
+      </div>
+    <script>
+        document.getElementById('overlay1').addEventListener('click', function () {
+          this.style.display = 'none';9
+        });
+        function closeOverlay() {
+          document.getElementById('overlay').style.display = 'none';
+        }
+      </script>
+      <div class="option-grid">
+        <div class="option-item" style="background-image: url('italy isola.png');" onclick="showOverlay('italy isola.png', 'Italy',)">
+        </div>
+        <div class="option-item" style="background-image: url('Mainpic/singapore lazarus.jpg');" onclick="showOverlay('Mainpic/singapore lazarus.jpg', 'Singapore')"> 
+        </div>
+        <div class="option-item" style="background-image: url('australia beach.jpg');" onclick="showOverlay('australia beach.jpg', 'Australia')">
+        </div>
+        <div class="option-item" style="background-image: url('canada beach.jpg');" onclick="showOverlay('canada beach.jpg', 'Canada')">
+        </div>
+        <div class="option-item" style="background-image: url('thailand banana.png');" onclick="showOverlay('thailand banana.png', 'Thailand')">
+        </div>
+        <div class="option-item" style="background-image: url('israel jarusalem.png');" onclick="showOverlay('israel jarusalem.png', 'Israel')">
+
+        </div>
+      </div>
+  <div class="overlay" id="overlay">
+    <div class="overlay-content" id="overlayContent">
+      <span class="close-button" onclick="closeOverlay()">×</span>
+      <button class="description-button" onclick="location.href='Australia.html'">해변에 대한 정보 보기</button>
+    </div>
+  </div>
+</body>
+</html>
